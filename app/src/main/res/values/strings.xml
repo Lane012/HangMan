@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">hangMan</string>
+    <string name="H">H</string>
+    <string name="A">A</string>
+    <string name="N">N</string>
+    <string name="G">G</string>
+    <string name="M">M</string>
+    <string name="New">New Game</string>
+    <string name="Settings">Settings</string>
+    <string name="Light">LIGHT</string>
+    <string name="Dark">DARK</string>
+    <string name="SETTINGS">SETTINGS</string>
+    <string name="Off">OFF</string>
+    <string name="On">ON</string>
+    <string name="MUSIC">MUSIC</string>
+    <string name="FOOD">FOOD</string>
+    <string name="Theme">THEME</string>
+    <string name="HISTORY">HISTORY</string>
+    <string name="GameDirectory">Game Modes</string>
+    <string name="OnePlayer">Single Player</string>
+    <string name="TwoPlayer">Two Player</string>
+</resources>

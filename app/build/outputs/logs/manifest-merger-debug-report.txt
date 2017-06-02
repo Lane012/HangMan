@@ -1,0 +1,103 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:2:1-31:12
+	package
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:3:5-39
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+application
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:6:5-29:19
+MERGED from [com.android.support:appcompat-v7:25.3.1] /home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:25.3.1] /home/lane/.android/build-cache/8d7f9ecaaaf8449b10b3afe36cc2279fd657af24/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] /home/lane/.android/build-cache/be4867c4c6e2f5e9425335cb1ed34cd252c7b968/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] /home/lane/.android/build-cache/e30e46eda054928ee114701175e748a436ad0cc4/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] /home/lane/.android/build-cache/3bf2777dde848fbc14653c7a7c6ce81fc706f289/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] /home/lane/.android/build-cache/fd2fd46e345c9b0600c1c537979decbabe86d508/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /home/lane/.android/build-cache/4eaaeb7d54f7b0ba07b62dad935164e1b5b08449/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /home/lane/.android/build-cache/bb947a0762a0fa980cb2ed7d166a9cfaca4d1b42/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:25.3.1] /home/lane/.android/build-cache/9615522422e010bb59d915dbdff8b82c34167e9d/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/lane/.android/build-cache/637fb029b8f6435ff779ad08f404613cf1b97123/output/AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:9:9-41
+	android:supportsRtl
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:11:9-35
+	android:roundIcon
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:10:9-54
+	android:allowBackup
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:7:9-35
+	android:icon
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:8:9-43
+	android:theme
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:12:9-40
+activity#com.example.lane.hangman.hangMenu
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:14:9-20:20
+	android:name
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:14:19-43
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:15:13-19:29
+action#android.intent.action.MAIN
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:18:27-74
+activity#com.example.lane.hangman.Settings
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:21:9-22:20
+	android:name
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:21:19-43
+activity#com.example.lane.hangman.GameCreator
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:23:9-24:20
+	android:name
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:23:19-46
+activity#com.example.lane.hangman.HangGame
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:25:8-26:19
+	android:name
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:25:18-42
+service#com.example.lane.hangman.musicPlayer
+ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:28:9-47
+	android:name
+		ADDED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml:28:18-45
+uses-sdk
+INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:25.3.1] /home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:25.3.1] /home/lane/.android/build-cache/8d7f9ecaaaf8449b10b3afe36cc2279fd657af24/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] /home/lane/.android/build-cache/be4867c4c6e2f5e9425335cb1ed34cd252c7b968/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] /home/lane/.android/build-cache/e30e46eda054928ee114701175e748a436ad0cc4/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] /home/lane/.android/build-cache/3bf2777dde848fbc14653c7a7c6ce81fc706f289/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] /home/lane/.android/build-cache/fd2fd46e345c9b0600c1c537979decbabe86d508/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /home/lane/.android/build-cache/4eaaeb7d54f7b0ba07b62dad935164e1b5b08449/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /home/lane/.android/build-cache/bb947a0762a0fa980cb2ed7d166a9cfaca4d1b42/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:25.3.1] /home/lane/.android/build-cache/9615522422e010bb59d915dbdff8b82c34167e9d/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/lane/.android/build-cache/637fb029b8f6435ff779ad08f404613cf1b97123/output/AndroidManifest.xml:5:5-7:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.3.1] /home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+		INJECTED from /home/lane/StudioProjects/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:25.3.1] /home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-v4:25.3.1] /home/lane/.android/build-cache/8d7f9ecaaaf8449b10b3afe36cc2279fd657af24/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] /home/lane/.android/build-cache/be4867c4c6e2f5e9425335cb1ed34cd252c7b968/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] /home/lane/.android/build-cache/e30e46eda054928ee114701175e748a436ad0cc4/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] /home/lane/.android/build-cache/3bf2777dde848fbc14653c7a7c6ce81fc706f289/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] /home/lane/.android/build-cache/fd2fd46e345c9b0600c1c537979decbabe86d508/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /home/lane/.android/build-cache/4eaaeb7d54f7b0ba07b62dad935164e1b5b08449/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /home/lane/.android/build-cache/bb947a0762a0fa980cb2ed7d166a9cfaca4d1b42/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-compat:25.3.1] /home/lane/.android/build-cache/9615522422e010bb59d915dbdff8b82c34167e9d/output/AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:appcompat-v7:25.3.1] /home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:appcompat-v7:25.3.1] /home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/AndroidManifest.xml:26:9-47

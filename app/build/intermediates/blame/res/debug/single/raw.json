@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/raw/button_click.mp3",
+        "source": "/home/lane/StudioProjects/app/src/main/res/raw/button_click.mp3"
+    },
+    {
+        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/raw/hang.mp3",
+        "source": "/home/lane/StudioProjects/app/src/main/res/raw/hang.mp3"
+    },
+    {
+        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/raw/food.mp3",
+        "source": "/home/lane/StudioProjects/app/src/main/res/raw/food.mp3"
+    }
+]

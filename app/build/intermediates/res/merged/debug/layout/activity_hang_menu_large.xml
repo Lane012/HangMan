@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:background="#ffff00">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/hang"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="65dip"
+        android:paddingTop="60dip">
+
+        <TextView android:id ="@+id/H"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="85sp"
+            android:text="@string/H"/>
+        <TextView android:id="@+id/A"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/H"
+            android:paddingLeft="7dp"
+            android:textSize="85sp"
+            android:text="@string/A"/>
+        <TextView android:id="@+id/N"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/A"
+            android:paddingLeft="7dp"
+            android:textSize="85sp"
+            android:text="@string/N"/>
+        <TextView
+            android:id="@+id/G"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/N"
+            android:paddingLeft="7dp"
+            android:textSize="85sp"
+            android:text="@string/G"/>
+        <TextView
+            android:id="@+id/M"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/G"
+            android:paddingLeft="7dip"
+            android:textSize="85sp"
+            android:text="@string/M"/>
+        <TextView
+            android:id="@+id/A2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/M"
+            android:paddingLeft="7dip"
+            android:textSize="85sp"
+            android:text="@string/A"/>
+        <TextView
+            android:id="@+id/N2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/A2"
+            android:paddingLeft="7dip"
+            android:textSize="85sp"
+            android:text="@string/N"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/New"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="40sp"
+        android:background="@drawable/border"
+        android:text="@string/New"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Settings"
+        android:layout_below="@+id/New"
+        android:background="@drawable/setting_border"
+        android:textSize="40sp"
+        android:text="@string/Settings"/>
+    <TextView
+        android:id="@+id/base"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/base"/>
+    <com.example.lane.hangman.hangPole
+        android:layout_width="wrap_content"
+        android:layout_height="50dip"
+        android:id="@+id/pole"
+        android:layout_below="@+id/hang"/>
+
+</RelativeLayout>
+

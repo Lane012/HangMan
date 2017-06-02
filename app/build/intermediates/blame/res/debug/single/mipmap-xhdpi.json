@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher.png",
+        "source": "/home/lane/StudioProjects/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher_round.png",
+        "source": "/home/lane/StudioProjects/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    }
+]
