@@ -1,14 +1,17 @@
 package com.example.lane.hangman;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,6 +21,7 @@ import android.widget.TextView;
 
 public class HangGame extends AppCompatActivity implements Game{
     ThemeSaver themeSaver;
+    PopupWindow endOfGameWindow;
     Colors color;
     RelativeLayout rl;
     HangMan hangman;
@@ -36,6 +40,8 @@ public class HangGame extends AppCompatActivity implements Game{
         setDrawable(R.drawable.lightbluebar, "lightBlueBar");
         setDrawable(R.drawable.lightredbar, "lightRedBar");
         setDrawable(R.drawable.lightyellowbar, "lightYellowBar");
+        setDrawable(R.drawable.usedbutton, "blackBackground");
+        setDrawable(R.drawable.white, "whiteBackground");
         setUpHangBackground();
         setContentView(R.layout.activity_game);
         setRelativeLayout();
@@ -69,6 +75,16 @@ public class HangGame extends AppCompatActivity implements Game{
         scroll = (RelativeLayout) findViewById(R.id.keyboard);
     }
 
+    public void showEndOfGamePopUp(){
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        PopupWindow endOfGameWindow = new PopupWindow(inflater.inflate(R.layout.end_of_game, null), 400,400, true);
+        endOfGameWindow.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.popupwindow));
+        endOfGameWindow.setFocusable(false);
+        endOfGameWindow.setOutsideTouchable(false);
+        endOfGameWindow.update();
+        endOfGameWindow.showAtLocation(rl, 0, 100, 500);
+    }
+
     public void getAndSetCategoryName(){
         Bundle b = getIntent().getExtras();
         color = (Colors)b.getSerializable("color");
@@ -91,12 +107,13 @@ public class HangGame extends AppCompatActivity implements Game{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GradientDrawable blackedBackground= (GradientDrawable)ContextCompat.getDrawable(getApplicationContext(), R.drawable.usedbutton);
-                GradientDrawable whiteBackground = (GradientDrawable)ContextCompat.getDrawable(getApplicationContext(), R.drawable.white);
                 ButtonSoundService.playButtonSound();
                 Button buttonPressed = (Button)v;
                 if(!compareGuessedLetterToSecretWord(buttonPressed) && !buttonPressed.getText().equals("HINT")){
                     hangman.countUp();
+                    if(hangman.gameOver()) {
+                        showEndOfGamePopUp();
+                    }
                     updateUI.run();
                 }
                 else if(((Button) v).getText().equals("HINT")){
@@ -104,10 +121,10 @@ public class HangGame extends AppCompatActivity implements Game{
                     updateUI.run();
                 }
                 if(darkTheme()) {
-                    v.setBackground(blackedBackground);
+                    v.setBackground(Drawables.getGradientDrawable("blackBackground"));
                 }
                 else{
-                    v.setBackground(whiteBackground);
+                    v.setBackground(Drawables.getGradientDrawable("whiteBackground"));
                 }
             }
         });
@@ -168,6 +185,7 @@ public class HangGame extends AppCompatActivity implements Game{
                     public void run() {
                         hangman.invalidate();
                         wordView.invalidate();
+                        rl.invalidate();
                     }
                 });
         }

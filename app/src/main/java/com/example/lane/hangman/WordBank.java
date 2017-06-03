@@ -112,7 +112,6 @@ public class WordBank {
         wordbank.put("whiskey", "liquor");
         wordbank.put("peekaboo", "form of play (infant)");
         wordbank.put("numbskull", "stupid person");
-
     }
     public static void createWordBank(){
         if(wordbank == null) {

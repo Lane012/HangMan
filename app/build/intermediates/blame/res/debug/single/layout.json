@@ -128,6 +128,10 @@
         "source": "/home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/res/layout/abc_list_menu_item_icon.xml"
     },
     {
+        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/layout/end_of_game.xml",
+        "source": "/home/lane/StudioProjects/app/src/main/res/layout/end_of_game.xml"
+    },
+    {
         "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
         "source": "/home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/res/layout/abc_dialog_title_material.xml"
     },

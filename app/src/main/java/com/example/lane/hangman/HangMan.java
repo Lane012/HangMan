@@ -44,6 +44,9 @@ public class HangMan extends View {
         themeSaver = ThemeSaver.getInstance();
 
     }
+    public boolean gameOver(){
+        return turns == 0;
+    }
     public HangMan(Context context, AttributeSet set){
         super(context, set);
         path = new Path();
