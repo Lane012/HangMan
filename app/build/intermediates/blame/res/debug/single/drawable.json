@@ -36,6 +36,10 @@
         "source": "/home/lane/StudioProjects/app/src/main/res/drawable/darkwordview.xml"
     },
     {
+        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/drawable/usedbutton.xml",
+        "source": "/home/lane/StudioProjects/app/src/main/res/drawable/usedbutton.xml"
+    },
+    {
         "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/drawable/abc_ic_ab_back_material.xml",
         "source": "/home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/res/drawable/abc_ic_ab_back_material.xml"
     },
@@ -166,6 +170,10 @@
     {
         "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background.xml",
         "source": "/home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/res/drawable/abc_dialog_material_background.xml"
+    },
+    {
+        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/drawable/white.xml",
+        "source": "/home/lane/StudioProjects/app/src/main/res/drawable/white.xml"
     },
     {
         "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",

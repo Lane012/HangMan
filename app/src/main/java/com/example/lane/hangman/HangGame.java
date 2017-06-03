@@ -23,7 +23,7 @@ public class HangGame extends AppCompatActivity implements Game{
     HangMan hangman;
     WordView wordView;
     DrawableHolder Drawables;
-    LinearLayout scroll;
+    RelativeLayout scroll;
     public HangGame(){
     }
     @Override
@@ -50,7 +50,7 @@ public class HangGame extends AppCompatActivity implements Game{
 
     public void setupHangMan(){
         int colorId = Colors.getColorId(color);
-        hangman = new HangMan(this, colorId);
+        hangman = new HangMan(this, colorId, wordView.getHint());
         updateUI.run();
         setUpHangBackground();
         rl.addView(hangman);
@@ -66,7 +66,7 @@ public class HangGame extends AppCompatActivity implements Game{
     }
 
     public void getAndSetScrollBar(){
-        scroll = (LinearLayout) findViewById(R.id.scroll);
+        scroll = (RelativeLayout) findViewById(R.id.keyboard);
     }
 
     public void getAndSetCategoryName(){
@@ -91,12 +91,24 @@ public class HangGame extends AppCompatActivity implements Game{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GradientDrawable blackedBackground= (GradientDrawable)ContextCompat.getDrawable(getApplicationContext(), R.drawable.usedbutton);
+                GradientDrawable whiteBackground = (GradientDrawable)ContextCompat.getDrawable(getApplicationContext(), R.drawable.white);
                 ButtonSoundService.playButtonSound();
-                if(!compareGuessedLetterToSecretWord((Button)v)){
+                Button buttonPressed = (Button)v;
+                if(!compareGuessedLetterToSecretWord(buttonPressed) && !buttonPressed.getText().equals("HINT")){
                     hangman.countUp();
                     updateUI.run();
                 }
-                scroll.removeView(v);
+                else if(((Button) v).getText().equals("HINT")){
+                    hangman.allowHint();
+                    updateUI.run();
+                }
+                if(darkTheme()) {
+                    v.setBackground(blackedBackground);
+                }
+                else{
+                    v.setBackground(whiteBackground);
+                }
             }
         });
     }
@@ -105,6 +117,9 @@ public class HangGame extends AppCompatActivity implements Game{
         for(int i=0; i < scroll.getChildCount(); i++){
             Button currentButton = (Button)scroll.getChildAt(i);
             setListener(currentButton);
+            if(!darkTheme()){
+                currentButton.setTextColor(Color.BLACK);
+            }
             currentButton.setBackground(buttonBarBackgroundChooser());
         }
     }

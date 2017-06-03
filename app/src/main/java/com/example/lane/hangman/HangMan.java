@@ -15,27 +15,28 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lane on 5/16/17.
  */
 
 public class HangMan extends View {
+    String hint;
     Path path;
     Paint paint;
     RectF headSize;
+    boolean drawHint;
     int color;
     ThemeSaver themeSaver;
     int missedCounter;
     int turns = -1;
 
 
-    public HangMan(Context context, int color){
+    public HangMan(Context context, int color, String hint){
         super(context);
+        this.hint = hint;
         turns = 6;
+        drawHint = false;
         missedCounter = 0;
         setWillNotDraw(false);
         setColor(color);
@@ -60,6 +61,9 @@ public class HangMan extends View {
     public void countUp() {
         missedCounter++;
         turns--;
+    }
+    public void allowHint(){
+        drawHint = true;
     }
 
 
@@ -100,6 +104,10 @@ public class HangMan extends View {
         this.color = color;
     }
 
+    public void revealHint(Canvas canvas){
+        String HINT = "HINT: ";
+        canvas.drawText(HINT + hint, 30, 400, paint);
+    }
     public void displayTurns(Canvas canvas){
         switch (turns){
             case 6:
@@ -133,9 +141,12 @@ public class HangMan extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        paint.setTextSize(28);
+        paint.setTextSize(25);
         paint.setStrokeWidth(2);
         displayTurns(canvas);
+        if(drawHint){
+            revealHint(canvas);
+        }
         if(missedCounter == 0) {
             setPaintDefaultWidth();
         }
