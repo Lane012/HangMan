@@ -41,6 +41,18 @@ public class Settings extends AppCompatActivity {
         On.setY(600);
         Off.setX(330);
         Off.setY(600);
+        if(themeSaver.getTheme().equals("LIGHT")){
+            Light.setChecked(true);
+        }
+        else{
+            Dark.setChecked(true);
+        }
+        if(!musicPlayer.playerSilenced()){
+            On.setChecked(true);
+        }
+        else{
+            Off.setChecked(true);
+        }
         setListeners();
         setMusicListeners();
     }

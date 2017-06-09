@@ -170,9 +170,5 @@
     {
         "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
         "source": "/home/lane/.android/build-cache/282a8965e8867ce1a58ef0aed10235fb753558d6/output/res/layout/abc_activity_chooser_view_list_item.xml"
-    },
-    {
-        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/layout/activity_game_creator.xml",
-        "source": "/home/lane/StudioProjects/app/src/main/res/layout/activity_game_creator.xml"
     }
 ]

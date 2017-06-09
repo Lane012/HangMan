@@ -1,9 +1,5 @@
 [
     {
-        "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/layout-normal-v4/activity_game_creator.xml",
-        "source": "/home/lane/StudioProjects/app/src/main/res/layout-normal/activity_game_creator.xml"
-    },
-    {
         "merged": "/home/lane/StudioProjects/app/build/intermediates/res/merged/debug/layout-normal-v4/activity_settings.xml",
         "source": "/home/lane/StudioProjects/app/src/main/res/layout-normal/activity_settings.xml"
     },

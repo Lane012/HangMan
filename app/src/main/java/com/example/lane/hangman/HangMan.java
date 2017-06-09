@@ -107,6 +107,10 @@ public class HangMan extends View {
         this.color = color;
     }
 
+    public int returnColor(){
+        return color;
+    }
+
     public void revealHint(Canvas canvas){
         String HINT = "HINT: ";
         canvas.drawText(HINT + hint, 30, 400, paint);
@@ -172,7 +176,7 @@ public class HangMan extends View {
         if(missedCounter >= 6){
             drawRightLeg();
         }
-        path.moveTo(400, 350);
+        path.moveTo(400, 415);
         path.lineTo(400, 30);
         path.moveTo(401, 30);
         path.lineTo(269, 30);

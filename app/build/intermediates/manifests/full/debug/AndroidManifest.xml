@@ -28,8 +28,6 @@
         </activity>
         <activity android:name="com.example.lane.hangman.Settings" >
         </activity>
-        <activity android:name="com.example.lane.hangman.GameCreator" >
-        </activity>
         <activity android:name="com.example.lane.hangman.HangGame" >
         </activity>
 

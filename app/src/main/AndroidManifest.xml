@@ -20,9 +20,7 @@
         </activity>
         <activity android:name=".Settings">
         </activity>
-        <activity android:name=".GameCreator">
-        </activity>
-       <activity android:name=".HangGame">
+        <activity android:name=".HangGame">
        </activity>
 
         <service android:name=".musicPlayer"/>

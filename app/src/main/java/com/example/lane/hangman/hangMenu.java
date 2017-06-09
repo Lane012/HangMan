@@ -1,6 +1,7 @@
 package com.example.lane.hangman;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 import java.util.concurrent.TimeUnit;
 
 public class hangMenu extends AppCompatActivity {
-    boolean leftMenu;
     TextView H;
     String[] colors;
     TextView A;
@@ -25,10 +25,10 @@ public class hangMenu extends AppCompatActivity {
     TextView A2;
     TextView N2;
     hangPole pole;
-    ColorChanger c;
     Button settings;
     TextView base;
     Button newGame;
+    private AsyncTask task;
     RelativeLayout rl;
     int screenWidth;
     private static ThemeSaver themeSaver;
@@ -74,19 +74,32 @@ public class hangMenu extends AppCompatActivity {
         A2.setTextColor(Color.parseColor(colors[2]));
         N2.setTextColor(Color.parseColor(colors[0]));
         startService();
-        c = new ColorChanger();
         rl = (RelativeLayout) findViewById(R.id.main);
         createListeners();
         pole = new hangPole(this, screenWidth);
-        pole.blackPole();
+        if(themeSaver.getTheme().equals("DARK")){
+            pole.purplePole();
+            GradientDrawable shape = (GradientDrawable) base.getBackground();
+            shape.setColor(Color.rgb(139,0,139));
+            rl.setBackgroundColor(Color.BLACK);
+        }
+        else {
+            pole.blackPole();
+        }
         rl.addView(pole);
-        c.execute(animator);
-        leftMenu = false;
+        task = new ColorChanger().execute();
+
+
+
+    }
+    @Override
+    public void onBackPressed() {
     }
 
     @Override
     public void onRestart() {
         super.onRestart();
+        task = new ColorChanger().execute();
         if (themeSaver.getTheme().equals("DARK")) {
             pole.purplePole();
             GradientDrawable shape = (GradientDrawable) base.getBackground();
@@ -98,9 +111,8 @@ public class hangMenu extends AppCompatActivity {
             shape.setColor(Color.BLACK);
             rl.setBackgroundColor(Color.YELLOW);
         }
-        c.execute(animator);
-        leftMenu = false;
     }
+
 
 
     public void createListeners() {
@@ -109,7 +121,7 @@ public class hangMenu extends AppCompatActivity {
             public void onClick(View v) {
                 ButtonSoundService.playButtonSound();
                 Intent intent = new Intent(getApplicationContext(), Settings.class);
-                leftMenu = true;
+                task.cancel(true);
                 startActivity(intent);
             }
         });
@@ -117,17 +129,27 @@ public class hangMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ButtonSoundService.playButtonSound();
-                Intent intent = new Intent(getApplicationContext(), GameCreator.class);
-                leftMenu = true;
-                startActivity(intent);
+                if(!musicPlayer.playerSilenced()) {
+                    musicPlayer.startNewSong(getBaseContext(), R.raw.food);
+                }
+                task.cancel(true);
+                createGameFactory();
             }
         });
+    }
+    public void createGameFactory(){
+        Colors color = Colors.getRandomColor();
+        Intent intent = new Intent(this, HangGame.class);
+        Bundle b = new Bundle();
+        b.putSerializable("color", color);
+        intent.putExtras(b);
+        startActivity(intent);
+
     }
 
 
     public Runnable animator = new Runnable() {
         public void run() {
-            while (!leftMenu) {
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
@@ -137,11 +159,8 @@ public class hangMenu extends AppCompatActivity {
                     @Override
                     public void run() {
                         pole.invalidate();
-                        pole.counter++;
                     }
                 });
-
-            }
         }
     };
 
@@ -156,8 +175,13 @@ public class hangMenu extends AppCompatActivity {
     private class ColorChanger extends AsyncTask<Runnable, Void, Void> {
         @Override
         public Void doInBackground(Runnable... run) {
+            while(!isCancelled()){
+                animator.run();
+            }
             return null;
         }
+
+
 
     }
 

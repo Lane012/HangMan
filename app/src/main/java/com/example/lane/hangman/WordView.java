@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -26,12 +27,15 @@ public class WordView extends RelativeLayout{
     GradientDrawable g;
     GradientDrawable d;
     TextView characterView;
+    int lettersGuessed;
     String word;
     String hint;
+    ArrayList<Character> guessedLetters;
 
     public WordView(Context context){
         super(context);
-        word = getWord();
+        guessedLetters = new ArrayList<>();
+        word = getRandomWord();
         hint = getHint();
         themeSaver = ThemeSaver.getInstance();
         g = (GradientDrawable) ContextCompat.getDrawable(context, R.drawable.wordview);
@@ -79,7 +83,18 @@ public class WordView extends RelativeLayout{
         }
     }
 
-    public String getWord(){
+    public boolean letterNotGuessed(Character letter){
+        for(int i=0; i< guessedLetters.size(); i++){
+            Character guessedLetter = guessedLetters.get(i);
+            if(letter.compareTo(guessedLetter) == 0){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public String getRandomWord(){
         WordBank.createWordBank();
         return WordBank.getRandomWord();
     }
@@ -87,18 +102,39 @@ public class WordView extends RelativeLayout{
         return WordBank.getHint(word);
     }
 
-    public void plugCharacterIn(int index){
-        TextView character = (TextView)this.getChildAt(index);
-        if(themeSaver.getTheme().equals("DARK")) {
-            character.setTextColor(Color.WHITE);
+    public String getWord(){
+        return this.word;
+    }
+
+    public boolean plugCharacterIn(Character letter){
+        boolean match = false;
+        guessedLetters.add(letter);
+        for(int i=0; i < this.getChildCount(); i++) {
+            TextView currentBox = (TextView) this.getChildAt(i);
+            Character currentLetter = currentBox.getText().charAt(0);
+            System.out.println(currentLetter + " " + letter);
+            if(currentLetter.compareTo(letter) == 0) {
+                match = true;
+                countUpLettersGuessed();
+                if (themeSaver.getTheme().equals("DARK")) {
+                    currentBox.setTextColor(Color.WHITE);
+                } else {
+                    currentBox.setTextColor(Color.BLACK);
+                }
+            }
         }
-        else{
-            character.setTextColor(Color.BLACK);
-        }
+        return match;
 
     }
     public WordView(Context context, AttributeSet a){
         super(context, a);
+    }
+
+    public void countUpLettersGuessed(){
+        this.lettersGuessed++;
+    }
+    public boolean wordGuessed(){
+        return lettersGuessed == this.getChildCount();
     }
 
 }

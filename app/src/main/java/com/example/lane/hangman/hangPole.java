@@ -18,6 +18,7 @@ import android.view.View;
 import java.util.concurrent.TimeUnit;
 
 public class hangPole extends View {
+    int headColor;
     boolean white;
     boolean black;
     Paint paint;
@@ -26,7 +27,6 @@ public class hangPole extends View {
     RectF r;
     String[] colors;
     int screenWidth;
-    int counter = 0;
     public hangPole(Context context, int screenSize){
         super(context);
         path = new Path();
@@ -119,6 +119,7 @@ public class hangPole extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
+        int currentHeadColor;
         if(black){
             blackPole();
         }
@@ -126,7 +127,12 @@ public class hangPole extends View {
             purplePole();
         }
         canvas.drawPath(this.path, this.paint);
-        paint.setColor(Color.parseColor(colors[(int)Math.floor(Math.random()*3)]));
+        currentHeadColor = Color.parseColor(colors[(int)Math.floor(Math.random()*3)]);
+        while(headColor == currentHeadColor){
+            currentHeadColor = Color.parseColor(colors[(int)Math.floor(Math.random()*3)]);
+        }
+        headColor = currentHeadColor;
+        paint.setColor(headColor);
         canvas.drawOval(r, paint);
         if(screenWidth > 500){
             hangLarge();

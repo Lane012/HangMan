@@ -1,8 +1,7 @@
 package com.example.lane.hangman;
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -10,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,13 +19,14 @@ import android.widget.TextView;
 
 public class HangGame extends AppCompatActivity implements Game{
     ThemeSaver themeSaver;
-    PopupWindow endOfGameWindow;
     Colors color;
     RelativeLayout rl;
     HangMan hangman;
     WordView wordView;
     DrawableHolder Drawables;
-    RelativeLayout scroll;
+    RelativeLayout KeyBoard;
+    LetterFetcher letterFetcher;
+    PopupWindow popupWindow;
     public HangGame(){
     }
     @Override
@@ -42,16 +41,30 @@ public class HangGame extends AppCompatActivity implements Game{
         setDrawable(R.drawable.lightyellowbar, "lightYellowBar");
         setDrawable(R.drawable.usedbutton, "blackBackground");
         setDrawable(R.drawable.white, "whiteBackground");
+        setDrawable(R.drawable.popupwindowblue, "bluePopUp");
+        setDrawable(R.drawable.popupwindowyellow, "yellowPopUp");
+        setDrawable(R.drawable.popupwindowred, "redPopUp");
+        setDrawable(R.drawable.popupwindowgreen, "greenPopUp");
+        setDrawable(R.drawable.greenbar, "greenBar");
+        setDrawable(R.drawable.whitemenu, "white");
         setUpHangBackground();
+        getAndSetColor();
+        GradientDrawable menuBackground = Drawables.getGradientDrawable("white");
+        menuBackground.setColor(Colors.getColorId(color));
         setContentView(R.layout.activity_game);
         setRelativeLayout();
-        getAndSetCategoryName();
+        setMenuListener();
         setUpWordView();
         getAndSetScrollBar();
-        setUpButtonBar();
+        setUpKeyBoard();
         rl.addView(wordView);
+        letterFetcher = new LetterFetcher();
+        letterFetcher.setWord(wordView.getWord());
         setupBackGround();
         setupHangMan();
+    }
+    @Override
+    public void onBackPressed() {
     }
 
     public void setupHangMan(){
@@ -72,53 +85,135 @@ public class HangGame extends AppCompatActivity implements Game{
     }
 
     public void getAndSetScrollBar(){
-        scroll = (RelativeLayout) findViewById(R.id.keyboard);
+        KeyBoard = (RelativeLayout) findViewById(R.id.keyboard);
     }
 
     public void showEndOfGamePopUp(){
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-        PopupWindow endOfGameWindow = new PopupWindow(inflater.inflate(R.layout.end_of_game, null), 400,400, true);
-        endOfGameWindow.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.popupwindow));
-        endOfGameWindow.setFocusable(false);
-        endOfGameWindow.setOutsideTouchable(false);
-        endOfGameWindow.update();
-        endOfGameWindow.showAtLocation(rl, 0, 100, 500);
+        popupWindow = new PopupWindow(inflater.inflate(R.layout.end_of_game, null), 400,400, true);
+        popupWindow.setBackgroundDrawable(keyboardBackGroundChooser());
+        RelativeLayout rl = (RelativeLayout)popupWindow.getContentView();
+        for(int i=2; i< rl.getChildCount(); i++){
+            Button popUpButton = (Button)rl.getChildAt(i);
+            setPopUpListener(popUpButton);
+            popUpButton.setBackground(buttonBackgroundChooser());
+
+        }
+        for(int i=0; i < KeyBoard.getChildCount(); i++){
+            Button currentButton = (Button)KeyBoard.getChildAt(i);
+            currentButton.setOnClickListener(null);
+        }
+        if(!hangman.gameOver()){
+            TextView message = (TextView)rl.getChildAt(0);
+            message.setText("NICE JOB!");
+            if(darkTheme()){
+                message.setTextColor(Color.WHITE);
+            }
+            message.setX(80);
+            message.setY(40);
+        }
+        else {
+            TextView text = (TextView) rl.getChildAt(1);
+            text.setText(wordView.getWord().toUpperCase());
+        }
+        popupWindow.setFocusable(false);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.update();
+        popupWindow.showAtLocation(rl, 0, 100, 400);
     }
 
-    public void getAndSetCategoryName(){
+    public void showMenuPrompt() {
+
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+        popupWindow = new PopupWindow(inflater.inflate(R.layout.end_of_game, null), 400,400, true);
+        popupWindow.setBackgroundDrawable(keyboardBackGroundChooser());
+        RelativeLayout rl = (RelativeLayout)popupWindow.getContentView();
+        for(int i=2; i< rl.getChildCount(); i++){
+            Button popUpButton = (Button)rl.getChildAt(i);
+            if(i == 2){
+                popUpButton.setText("YES");
+            }
+            else{
+                popUpButton.setText("CANCEL");
+            }
+            setPopUpListener(popUpButton);
+            popUpButton.setBackground(buttonBackgroundChooser());
+
+        }
+        for(int i=0; i < KeyBoard.getChildCount(); i++){
+            Button currentButton = (Button)KeyBoard.getChildAt(i);
+            currentButton.setOnClickListener(null);
+        }
+        TextView message = (TextView)rl.getChildAt(0);
+        message.setText("ARE YOU SURE YOU WANT TO LEAVE THE GAME?");
+        if(darkTheme()){
+            message.setTextColor(Color.WHITE);
+        }
+        message.setX(0);
+        message.setY(0);
+        popupWindow.setFocusable(false);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.update();
+        popupWindow.showAtLocation(rl, 0, 100, 400);
+    }
+
+
+
+
+    public void getAndSetColor(){
         Bundle b = getIntent().getExtras();
         color = (Colors)b.getSerializable("color");
     }
+    public void setMenuListener(){
+        Button menu = (Button)rl.getChildAt(1);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMenuPrompt();
+            }
+
+        });
+    }
+
 
     public boolean compareGuessedLetterToSecretWord(Button b){
         boolean match = false;
-        Character currentCharacter = Character.toLowerCase(b.getText().charAt(0));
-        for(int i= 0; i < wordView.getChildCount(); i++) {
-            TextView child = (TextView) wordView.getChildAt(i);
-            Character childCharacter = Character.toLowerCase(child.getText().charAt(0));
-            if (currentCharacter.compareTo(childCharacter) == 0) {
-                wordView.plugCharacterIn(i);
-                match = true;
-            }
+        Character currentCharacter;
+        if(!b.getText().equals("HINT") && !b.getText().equals("REVEAL A LETTER")) {
+            currentCharacter = b.getText().charAt(0); // can't convert to character so we just grab the one letter as a character
+        }
+        else{                        // if hint or reveal a letter button is pressed
+            currentCharacter = '1'; // assign a 1 because no word will contain one.
+        }
+        if (wordView.plugCharacterIn(currentCharacter)) {
+            match = true;
         }
         return match;
     }
-    public void setListener(Button button){
+
+    public void setListener(final Button button){
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ButtonSoundService.playButtonSound();
                 Button buttonPressed = (Button)v;
-                if(!compareGuessedLetterToSecretWord(buttonPressed) && !buttonPressed.getText().equals("HINT")){
+                buttonPressed.setOnClickListener(null);
+                if(!compareGuessedLetterToSecretWord(buttonPressed) && !buttonPressed.getText().equals("HINT") && !buttonPressed.getText().equals("REVEAL A LETTER")){
                     hangman.countUp();
-                    if(hangman.gameOver()) {
-                        showEndOfGamePopUp();
-                    }
                     updateUI.run();
                 }
-                else if(((Button) v).getText().equals("HINT")){
+                else if(buttonPressed.getText().equals("REVEAL A LETTER")){
+                    Character letter = LetterFetcher.getLetter(wordView);
+                    wordView.plugCharacterIn(letter);
+                    cancelButtonThatContainsLetteredRevealed(letter);
+                    updateUI.run();
+                }
+                else if(buttonPressed.getText().equals("HINT")){
                     hangman.allowHint();
                     updateUI.run();
+                }
+                if(wordView.wordGuessed() || hangman.gameOver()){
+                    showEndOfGamePopUp();
                 }
                 if(darkTheme()) {
                     v.setBackground(Drawables.getGradientDrawable("blackBackground"));
@@ -129,19 +224,103 @@ public class HangGame extends AppCompatActivity implements Game{
             }
         });
     }
+    public void cancelButtonThatContainsLetteredRevealed(Character letter){
+        for(int i=0; i< KeyBoard.getChildCount(); i++){
+            TextView currentButton = (TextView)KeyBoard.getChildAt(i);
+            if(letter.compareTo(currentButton.getText().charAt(0)) == 0){
+                if(darkTheme()){
+                    currentButton.setOnClickListener(null);
+                    currentButton.setBackground(Drawables.getGradientDrawable("blackBackground"));
+                }
+                else{
+                    currentButton.setOnClickListener(null);
+                    currentButton.setBackground(Drawables.getGradientDrawable("whiteBackground"));
+                }
+            }
+        }
 
-    public void setUpButtonBar(){
-        for(int i=0; i < scroll.getChildCount(); i++){
-            Button currentButton = (Button)scroll.getChildAt(i);
+    }
+    public void setPopUpListener(Button button){
+        button.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
+            @Override
+            public void onClick(View v) {
+                Button buttonClicked = (Button)v;
+                if(buttonClicked.getText().equals("MAIN MENU") || buttonClicked.getText().equals("YES")){
+                    musicPlayer.stop();
+                    intent = new Intent(getApplicationContext(), hangMenu.class);
+                    startActivity(intent);
+                }
+                else if(buttonClicked.getText().equals("CANCEL")){
+                    for(int i=0; i < KeyBoard.getChildCount(); i++){
+                        Button currentButton = (Button)KeyBoard.getChildAt(i);
+                        setListener(currentButton);
+                    }
+                    popupWindow.dismiss();
+                }
+
+                else{
+                    if(!musicPlayer.playerSilenced()){
+                    musicPlayer.startNewSong(getBaseContext(), R.raw.food);
+                    }
+                    intent = new Intent(getApplicationContext(), HangGame.class);
+                    Colors color;
+                    while(true) {
+                        color = Colors.getRandomColor();
+                        int colorId = Colors.getColorId(color);
+
+                        if(colorId != hangman.returnColor() ){
+                            break;
+                        }
+                    }
+                    Bundle b = new Bundle();
+                    b.putSerializable("color", color);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+
+
+    public void setUpKeyBoard(){
+        for(int i=0; i < KeyBoard.getChildCount(); i++){
+            Button currentButton = (Button)KeyBoard.getChildAt(i);
             setListener(currentButton);
             if(!darkTheme()){
                 currentButton.setTextColor(Color.BLACK);
             }
-            currentButton.setBackground(buttonBarBackgroundChooser());
+            currentButton.setBackground(buttonBackgroundChooser());
+
+
+
         }
     }
 
-    public GradientDrawable buttonBarBackgroundChooser(){
+    public GradientDrawable keyboardBackGroundChooser(){
+        GradientDrawable keyboardBackground;
+        switch(color){
+            case YELLOW:
+                keyboardBackground = Drawables.getGradientDrawable("yellowPopUp");
+                break;
+            case BLUE:
+                keyboardBackground = Drawables.getGradientDrawable("bluePopUp");
+                break;
+            case RED:
+                keyboardBackground = Drawables.getGradientDrawable("redPopUp");
+                break;
+            case GREEN:
+                keyboardBackground = Drawables.getGradientDrawable("greenPopUp");
+                break;
+            default:
+                keyboardBackground= Drawables.getGradientDrawable("yellowPopUp");
+        }
+        return keyboardBackground;
+
+    }
+
+    public GradientDrawable buttonBackgroundChooser(){
         GradientDrawable buttonBarBackground;
         switch(color) {
             case YELLOW:
@@ -153,8 +332,11 @@ public class HangGame extends AppCompatActivity implements Game{
             case RED:
                 buttonBarBackground = Drawables.getGradientDrawable("lightRedBar");
                 break;
-            default:
-                buttonBarBackground = Drawables.getGradientDrawable("lightYellowBar");
+            case GREEN:
+                buttonBarBackground = Drawables.getGradientDrawable("greenBar");
+                break;
+             default:
+                 buttonBarBackground = Drawables.getGradientDrawable("greenBar");
         }
         return buttonBarBackground;
     }
@@ -214,12 +396,20 @@ public class HangGame extends AppCompatActivity implements Game{
                     rl.setBackgroundColor(Color.BLUE);
                 }
             }
-            else{
+            else if (color.equals(Colors.YELLOW)){
                 if (darkTheme()) {
                     rl.setBackgroundColor(Color.rgb(255, 204, 0));
                 }
                 else {
                     rl.setBackgroundColor(Color.rgb(229, 96, 9));
+                }
+            }
+            else{
+                if(darkTheme()){
+                    rl.setBackgroundColor(Color.rgb(11, 76, 5));
+                }
+                else{
+                    rl.setBackgroundColor(Color.GREEN);
                 }
             }
     }

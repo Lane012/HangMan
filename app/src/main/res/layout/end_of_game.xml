@@ -5,22 +5,29 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="YOU LOST!"
-        android:layout_marginStart="100dp"
+        android:text="SORRY, WORD WAS:"
+        android:layout_marginStart="50dp"
         android:textSize="30sp" />
-    <Button
-        android:id="@+id/playAgain"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:textSize="45sp" />
+
+    <Button
+        android:id="@+id/playAgain"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="180dp"
         android:text="PLAY AGAIN"
         android:textSize="30sp" />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="300dip"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="280dp"
         android:text="MAIN MENU"
         android:textSize="30sp" />
 

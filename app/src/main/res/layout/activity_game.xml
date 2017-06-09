@@ -5,11 +5,19 @@
     android:layout_height="fill_parent">
     <com.example.lane.hangman.HangMan
         android:id="@+id/hangBox"
-        android:layout_width="fill_parent"
+        android:layout_width="450dp"
         android:layout_height="450dip"
         android:layout_alignParentStart="true"
         android:background="@drawable/hangframe">
     </com.example.lane.hangman.HangMan>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@id/hangBox"
+        android:text="MAIN MENU"
+        android:textSize="40sp"
+        android:background="@drawable/whitemenu"/>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/keyboard"
         android:layout_marginTop="600dp"
@@ -267,13 +275,24 @@
             android:textColor="#ffffff"
             android:background="@drawable/buttonguesser"/>
         <Button
+            android:id="@+id/reveal"
+            android:layout_height="wrap_content"
+            android:layout_width="275dip"
+            android:layout_below="@id/v"
+            android:layout_toRightOf="@id/z"
+            android:text="REVEAL A LETTER"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:background="@drawable/buttonguesser"
+          />
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/hint"
             android:text="HINT"
             android:layout_toRightOf="@id/x"
             android:layout_below="@id/y"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="#ffffff"
             />
 

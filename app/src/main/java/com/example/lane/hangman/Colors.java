@@ -12,7 +12,7 @@ import java.util.Random;
  */
 
 public enum Colors {
-        YELLOW, BLUE, RED;
+        YELLOW, BLUE, RED, GREEN;
 
         private static List<Colors> COLORS = Collections.unmodifiableList(Arrays.asList(values()));
         private static final int SIZE = COLORS.size();
@@ -29,6 +29,8 @@ public enum Colors {
                     return Color.BLUE;
                 case RED:
                     return Color.RED;
+                case GREEN:
+                    return Color.GREEN;
                 default:
                     return Color.BLUE;
             }
